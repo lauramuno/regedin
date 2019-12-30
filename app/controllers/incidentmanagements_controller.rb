@@ -2,14 +2,14 @@ class IncidentmanagementsController < ApplicationController
   before_action :authenticate_login!
   before_action :authenticate_role_user
   before_action :set_incidentmanagement, only: [:show, :edit, :update, :destroy]
-  
+
   # GET /incidentmanagements
   # GET /incidentmanagements.json
   def index
     if params[:search].present?
       @incidentmanagements = Incidentmanagement.where("incident_id LIKE ?", "%#{params[:search]}%").page params[:page]
        else
-        @incidents = Incident.page(params[:page]).per(5)
+        @incidents = Incident.joins(:incidentmanagements).where("incidentmanagements.user_id = #{current_login.id}").page(params[:page]).per(5)
             respond_to do |format|#parametro para mostrar en pdf
             format.html
             format.json
@@ -94,7 +94,7 @@ class IncidentmanagementsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def incidentmanagement_params
-      params.require(:incidentmanagement).permit(:user_id, :incident_id, :datereport, :description, :state, :picture, :picture_cache, :picture_url, :search, :page, :file, :pdf)
+      params.require(:incidentmanagement).permit(:user_id, :incident_id, :datereport, :description, :state, :page)
     end
 
     def authenticate_role_user

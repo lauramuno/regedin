@@ -9,7 +9,7 @@
  <div class="footer text-left">
     <%= link_to 'Regresar', incidentmanagements_path, class: "btn btn-info" %>
   </div><br/>
-  
+
 <h5 class="text-left"><kbd>Incidencia reportada</kbd></h5>
 <div class="modal-content text-center">
 <div class="table-responsive">
@@ -81,7 +81,7 @@
   <tbody>
      <br/><br/>
        <figure class="figure">
-         <%= image_tag(@incidentmanagement.picture_url, class: 'figure-img img-fluid rounded', alt: 'Image') if @incidentmanagement.picture? %>
+         <%= image_tag(@incidentmanagement.picture_url, class: 'figure-img img-fluid rounded', alt: 'Image') if @incidentmanagement.incident.picture? %>
        </figure>
   </tbody>
 </label>
@@ -104,7 +104,7 @@
 <%= simple_form_for(@incidentmanagement) do |f| %>
         <%= f.error_notification %>
         <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-    
+
 <form class="form-inline" method="post">
 
     <label class="form-group col-md-3">
@@ -132,9 +132,9 @@
      <%= f.file_field :picture, class: 'form-control' %>
     <br/>
     <figure class="figure">
-      <%comment= image_tag(@incidentmanagement.picture_url, class: 'figures-imgindex img-fluid rounded', alt: 'Image') if @incidentmanagement.picture? %>
+      <%comment= image_tag(@incidentmanagement.picture_url, class: 'figures-imgindex img-fluid rounded', alt: 'Image') if @incidentmanagement.incident.picture? %>
      </figure>
-      <%= f.hidden_field :picture_cache %>
+       <!-- f.hidden_field :picture_cache  -->
     </div>
 
     <label class="form-group col-md-5">

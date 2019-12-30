@@ -26,7 +26,7 @@
 <form class="form-inline">
     <label class="form-group col-md-6">
     <figcaption class="figure-caption">
-      <%= f.association :userapplication, label_method: :lista_appclient, input_html: { class: "form-control mb-2 mr-sm-2"}%>
+      <%= f.association :userapplication, collection: Userapplication.where(user_id: current_login.id).includes(:applicationclient), label_method: :lista_appclient, input_html: { class: "form-control mb-2 mr-sm-2"}%>
     </figcaption>
     </label>
 
