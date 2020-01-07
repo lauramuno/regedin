@@ -165,9 +165,9 @@ end
 
   def application_operator_index
 
-    @applicationoperators = Applicationoperator.page(params[:page]).per(5)
-    @applications = Applicationclient.all
     @user = User.find(params[:id])
+    @applicationoperators = @user.applicationoperators.page(params[:page]).per(5)
+    @applications = Applicationclient.all
     @applicationoperator = Applicationoperator.new
     render "applicationoperators/index"
 

@@ -25,8 +25,7 @@ class IncidentmanagementsController < ApplicationController
 
   # GET /incidentmanagements/new
   def new
-    @incidentmanagement = Incidentmanagement.new
-    @incidentmanagement.picture = params[:file]
+    @incidents = Incident.joins(:incidentmanagements).where("incidentmanagements.user_id = #{current_login.id}").order("incidentmanagements.id DESC")
   end
 
   # GET /incidentmanagements/1/edit
@@ -62,9 +61,9 @@ class IncidentmanagementsController < ApplicationController
   # PATCH/PUT /incidentmanagements/1
   # PATCH/PUT /incidentmanagements/1.json
   def update
-    @incidentmanagement.picture.url # => '/url/to/file.png'
-    @incidentmanagement.picture.current_path # => 'path/to/file.png'
-    @incidentmanagement.picture_identifier # => 'file.png'
+    #@incidentmanagement.picture.url # => '/url/to/file.png'
+    #@incidentmanagement.picture.current_path # => 'path/to/file.png'
+   # @incidentmanagement.picture_identifier # => 'file.png'
     respond_to do |format|
       if @incidentmanagement.update(incidentmanagement_params)
         format.html { redirect_to @incidentmanagement, notice: 'Incidentmanagement was successfully updated.' }
